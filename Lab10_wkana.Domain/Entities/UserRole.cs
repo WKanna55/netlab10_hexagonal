@@ -1,6 +1,6 @@
 ﻿namespace Lab10_wkana.Domain.Entities;
 
-public partial class UserRoles
+public partial class UserRole
 {
     public Guid UserId { get; set; }
 
@@ -8,7 +8,7 @@ public partial class UserRoles
 
     public DateTime? AssignedAt { get; set; }
 
-    public virtual Roles Role { get; set; } = null!;
+    public virtual Role Role { get; set; } = null!;
 
-    public virtual Users User { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
 }

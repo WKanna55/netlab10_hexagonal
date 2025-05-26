@@ -1,4 +1,5 @@
 using Lab10_wkana.Persistense.Configuration;
+using Lab10_wkana.Persistense.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,9 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty; // Esto hace que Swagger esté en "/"
     });
 }
+
+//middleware para detallar errores
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

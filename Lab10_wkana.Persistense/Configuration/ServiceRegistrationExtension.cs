@@ -1,4 +1,5 @@
 using System.Text;
+using Lab10_wkana.Application.Config;
 using Lab10_wkana.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -16,6 +17,12 @@ public static class ServiceRegistrationExtension
         
         // servicios de la infraestrucra como BD Servicios externos, etc
         services.AddInfrastructureServices(configuration);
+
+        // agrega los repositorios de la capa infrastructure
+        services.AddRepositoriesService();
+
+        // agrega los servicios de la capa application 
+        services.AddServices();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
         {

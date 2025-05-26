@@ -1,6 +1,6 @@
 ﻿namespace Lab10_wkana.Domain.Entities;
 
-public partial class Tickets
+public partial class Ticket
 {
     public Guid TicketId { get; set; }
 
@@ -16,7 +16,7 @@ public partial class Tickets
 
     public DateTime? ClosedAt { get; set; }
 
-    public virtual ICollection<Responses> Responses { get; set; } = new List<Responses>();
+    public virtual ICollection<Response> Responses { get; set; } = new List<Response>();
 
-    public virtual Users User { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
 }

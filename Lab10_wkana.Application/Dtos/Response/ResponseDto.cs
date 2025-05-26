@@ -1,6 +1,6 @@
-﻿namespace Lab10_wkana.Domain.Entities;
+namespace Lab10_wkana.Application.Dtos.Response;
 
-public partial class Responses
+public class ResponseDto
 {
     public Guid ResponseId { get; set; }
 
@@ -11,8 +11,4 @@ public partial class Responses
     public string Message { get; set; } = null!;
 
     public DateTime? CreatedAt { get; set; }
-
-    public virtual Users Responder { get; set; } = null!;
-
-    public virtual Tickets Ticket { get; set; } = null!;
 }

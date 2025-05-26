@@ -14,19 +14,19 @@ public partial class ApplicationDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Responses> Responses { get; set; }
+    public virtual DbSet<Response> Responses { get; set; }
 
-    public virtual DbSet<Roles> Roles { get; set; }
+    public virtual DbSet<Role> Roles { get; set; }
 
-    public virtual DbSet<Tickets> Tickets { get; set; }
+    public virtual DbSet<Ticket> Tickets { get; set; }
 
-    public virtual DbSet<UserRoles> UserRoles { get; set; }
+    public virtual DbSet<User> Users { get; set; }
 
-    public virtual DbSet<Users> Users { get; set; }
-
+    public virtual DbSet<UserRole> UserRoles { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Responses>(entity =>
+        modelBuilder.Entity<Response>(entity =>
         {
             entity.HasKey(e => e.ResponseId).HasName("responses_pkey");
 
@@ -53,7 +53,7 @@ public partial class ApplicationDbContext : DbContext
                 .HasConstraintName("responses_ticket_id_fkey");
         });
 
-        modelBuilder.Entity<Roles>(entity =>
+        modelBuilder.Entity<Role>(entity =>
         {
             entity.HasKey(e => e.RoleId).HasName("roles_pkey");
 
@@ -69,7 +69,7 @@ public partial class ApplicationDbContext : DbContext
                 .HasColumnName("role_name");
         });
 
-        modelBuilder.Entity<Tickets>(entity =>
+        modelBuilder.Entity<Ticket>(entity =>
         {
             entity.HasKey(e => e.TicketId).HasName("tickets_pkey");
 
@@ -100,29 +100,7 @@ public partial class ApplicationDbContext : DbContext
                 .HasConstraintName("tickets_user_id_fkey");
         });
 
-        modelBuilder.Entity<UserRoles>(entity =>
-        {
-            entity.HasKey(e => new { e.UserId, e.RoleId }).HasName("user_roles_pkey");
-
-            entity.ToTable("user_roles");
-
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-            entity.Property(e => e.RoleId).HasColumnName("role_id");
-            entity.Property(e => e.AssignedAt)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
-                .HasColumnName("assigned_at");
-
-            entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
-                .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("user_roles_role_id_fkey");
-
-            entity.HasOne(d => d.User).WithMany(p => p.UserRoles)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("user_roles_user_id_fkey");
-        });
-
-        modelBuilder.Entity<Users>(entity =>
+        modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("users_pkey");
 
@@ -148,6 +126,28 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(100)
                 .HasColumnName("username");
+        });
+
+        modelBuilder.Entity<UserRole>(entity =>
+        {
+            entity.HasKey(e => new { e.UserId, e.RoleId }).HasName("user_roles_pkey");
+
+            entity.ToTable("user_roles");
+
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.RoleId).HasColumnName("role_id");
+            entity.Property(e => e.AssignedAt)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("assigned_at");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.UserRoles)
+                .HasForeignKey(d => d.RoleId)
+                .HasConstraintName("user_roles_role_id_fkey");
+
+            entity.HasOne(d => d.User).WithMany(p => p.UserRoles)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("user_roles_user_id_fkey");
         });
 
         OnModelCreatingPartial(modelBuilder);
