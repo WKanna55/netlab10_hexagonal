@@ -10,6 +10,7 @@ public static class ServicesExtension
     {
 
         services.AddScoped<IResponseService, ResponseService>();
+        services.AddScoped<IRoleService, RoleService>();
         
         return services;
     }

@@ -2,11 +2,11 @@
 
 public partial class Response
 {
-    public Guid ResponseId { get; set; }
+    public int ResponseId { get; set; }
 
-    public Guid TicketId { get; set; }
+    public int TicketId { get; set; }
 
-    public Guid ResponderId { get; set; }
+    public int ResponderId { get; set; }
 
     public string Message { get; set; } = null!;
 

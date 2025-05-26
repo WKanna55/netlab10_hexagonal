@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Dtos\Role\" />
       <Folder Include="Dtos\Ticket\" />
       <Folder Include="Dtos\UserRole\" />
       <Folder Include="Dtos\User\" />

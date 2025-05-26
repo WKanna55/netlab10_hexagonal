@@ -23,7 +23,7 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserRole> UserRoles { get; set; }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Response>(entity =>
@@ -32,9 +32,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.ToTable("responses");
 
-            entity.Property(e => e.ResponseId)
-                .ValueGeneratedNever()
-                .HasColumnName("response_id");
+            entity.Property(e => e.ResponseId).HasColumnName("response_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
@@ -61,9 +59,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.RoleName, "roles_role_name_key").IsUnique();
 
-            entity.Property(e => e.RoleId)
-                .ValueGeneratedNever()
-                .HasColumnName("role_id");
+            entity.Property(e => e.RoleId).HasColumnName("role_id");
             entity.Property(e => e.RoleName)
                 .HasMaxLength(50)
                 .HasColumnName("role_name");
@@ -75,9 +71,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.ToTable("tickets");
 
-            entity.Property(e => e.TicketId)
-                .ValueGeneratedNever()
-                .HasColumnName("ticket_id");
+            entity.Property(e => e.TicketId).HasColumnName("ticket_id");
             entity.Property(e => e.ClosedAt)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("closed_at");
@@ -110,9 +104,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.Username, "users_username_key").IsUnique();
 
-            entity.Property(e => e.UserId)
-                .ValueGeneratedNever()
-                .HasColumnName("user_id");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")

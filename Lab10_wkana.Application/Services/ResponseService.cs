@@ -23,8 +23,8 @@ public class ResponseService : IResponseService
     
     public async Task<ResponseDto> GetReponseByIdAsync(int responseId)
     {
-        var responses = await _unitOfWork.Repository<Response>().GetByIdAsync(responseId);
-        return responses.Adapt<ResponseDto>();
+        var response = await _unitOfWork.Repository<Response>().GetByIdAsync(responseId);
+        return response.Adapt<ResponseDto>();
     }
     
 }

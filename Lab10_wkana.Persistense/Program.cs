@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+// Add services to the container.
+builder.Services.AddControllers();
 
 builder.Services.AddApplicationServices(builder.Configuration);
 
@@ -30,10 +32,12 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
-
+app.UseRouting();
 // para jwt
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllers();
 
 
 app.Run();

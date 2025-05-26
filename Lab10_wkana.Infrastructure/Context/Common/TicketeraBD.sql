@@ -1,13 +1,12 @@
-
 -- Tabla Roles
 CREATE TABLE roles (
-    role_id UUID PRIMARY KEY,
+    role_id SERIAL PRIMARY KEY,
     role_name VARCHAR(50) NOT NULL UNIQUE
 );
 
 -- Tabla Usuarios
 CREATE TABLE users (
-    user_id UUID PRIMARY KEY,
+    user_id SERIAL PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     email VARCHAR(150) UNIQUE,
@@ -16,8 +15,8 @@ CREATE TABLE users (
 
 -- Tabla pivote para asignar roles a usuarios (muchos a muchos)
 CREATE TABLE user_roles (
-    user_id UUID NOT NULL,
-    role_id UUID NOT NULL,
+    user_id INT NOT NULL,
+    role_id INT NOT NULL,
     assigned_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
     PRIMARY KEY (user_id, role_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
@@ -26,8 +25,8 @@ CREATE TABLE user_roles (
 
 -- Tabla Tickets
 CREATE TABLE tickets (
-    ticket_id UUID PRIMARY KEY,
-    user_id UUID NOT NULL,
+    ticket_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     status VARCHAR(20) NOT NULL CHECK (status IN ('abierto', 'en_proceso', 'cerrado')),
@@ -38,9 +37,9 @@ CREATE TABLE tickets (
 
 -- Tabla Respuestas
 CREATE TABLE responses (
-    response_id UUID PRIMARY KEY,
-    ticket_id UUID NOT NULL,
-    responder_id UUID NOT NULL,
+    response_id SERIAL PRIMARY KEY,
+    ticket_id INT NOT NULL,
+    responder_id INT NOT NULL,
     message TEXT NOT NULL,
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
     FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id) ON DELETE CASCADE,

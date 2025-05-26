@@ -2,9 +2,9 @@
 
 public partial class Ticket
 {
-    public Guid TicketId { get; set; }
+    public int TicketId { get; set; }
 
-    public Guid UserId { get; set; }
+    public int UserId { get; set; }
 
     public string Title { get; set; } = null!;
 
